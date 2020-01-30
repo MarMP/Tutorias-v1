@@ -117,8 +117,8 @@ public class Vista {
 
 	public void listarProfesores() {
 		Consola.mostrarCabecera("Listado de Profesores");
-		Profesor[] profesores = controlador.getProfesores();
-		if (profesores[0] != null) {
+		List<Profesor> profesores = controlador.getProfesores();
+		if (!profesores.isEmpty()) {
 			for (Profesor profesor : profesores) {
 				if (profesor != null)
 					System.out.println(profesor);

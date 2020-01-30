@@ -101,7 +101,7 @@ public class Controlador {
 		return modelo.getAlumnos();
 	}
 
-	public Profesor[] getProfesores() {
+	public List<Profesor> getProfesores() {
 		return modelo.getProfesores();
 	}
 
