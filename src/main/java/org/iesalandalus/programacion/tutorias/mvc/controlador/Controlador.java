@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.tutorias.mvc.controlador;
 
+import java.util.List;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.tutorias.mvc.modelo.Modelo;
@@ -95,7 +97,7 @@ public class Controlador {
 		modelo.borrar(cita);
 	}
 
-	public Alumno[] getAlumnos() {
+	public List <Alumno>getAlumnos() {
 		return modelo.getAlumnos();
 	}
 

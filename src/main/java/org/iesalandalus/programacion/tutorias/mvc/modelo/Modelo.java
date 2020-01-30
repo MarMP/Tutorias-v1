@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.tutorias.mvc.modelo;
 
+import java.util.List;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Alumno;
@@ -23,12 +25,11 @@ public class Modelo {
 	private Sesiones sesiones;
 
 	public Modelo() {
-		alumnos = new Alumnos(CAPACIDAD);
+		alumnos = new Alumnos();
 		citas = new Citas(CAPACIDAD);
 		profesores = new Profesores(CAPACIDAD);
 		tutorias = new Tutorias(CAPACIDAD);
 		sesiones = new Sesiones(CAPACIDAD);
-
 	}
 
 	public void insertar(Alumno alumno) throws OperationNotSupportedException {
@@ -48,7 +49,6 @@ public class Modelo {
 			throw new OperationNotSupportedException("ERROR: No existe ningún profesor con ese DNI.");
 		}
 		tutorias.insertar(new Tutoria (profesor, tutoria.getNombre())); 
-		//tutorias.insertar(tutoria);
 	}
 
 	public void insertar(Sesion sesion) throws OperationNotSupportedException {
@@ -60,7 +60,6 @@ public class Modelo {
 			throw new OperationNotSupportedException("ERROR: No existe ninguna tutoria.");
 		}
 		sesiones.insertar(new Sesion (tutoria, sesion.getFecha(), sesion.getHoraInicio(),sesion.getHoraFin(),sesion.getMinutosDuracion()));
-		// sesiones.insertar(sesion);
 	}
 
 	public void insertar(Cita cita) throws OperationNotSupportedException {
@@ -76,8 +75,6 @@ public class Modelo {
 			throw new OperationNotSupportedException("ERROR: No existe ninguna sesión con esa tutoria y fecha.");
 		} 
 		citas.insertar(new Cita(alumno, sesion, cita.getHora()));  
-		
-		//citas.insertar(cita);
 	}
 
 	public Alumno buscar(Alumno alumno) {
@@ -120,7 +117,7 @@ public class Modelo {
 		citas.borrar(cita);
 	}
 
-	public Alumno[] getAlumnos() {
+	public List <Alumno> getAlumnos() {
 		return alumnos.get();
 	}
 
