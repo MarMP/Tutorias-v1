@@ -27,8 +27,8 @@ public class Modelo {
 	public Modelo() {
 		alumnos = new Alumnos();
 		profesores = new Profesores();
+		tutorias = new Tutorias();
 		citas = new Citas(CAPACIDAD);
-		tutorias = new Tutorias(CAPACIDAD);
 		sesiones = new Sesiones(CAPACIDAD);
 	}
 
@@ -125,11 +125,11 @@ public class Modelo {
 		return profesores.get();
 	}
 
-	public Tutoria[] getTutorias() {
+	public List<Tutoria> getTutorias() {
 		return tutorias.get();
 	}
 
-	public Tutoria[] getTutorias(Profesor profesor) {
+	public List<Tutoria> getTutorias(Profesor profesor) {
 		return tutorias.get(profesor);
 	}
 
