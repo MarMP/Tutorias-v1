@@ -28,8 +28,8 @@ public class Modelo {
 		alumnos = new Alumnos();
 		profesores = new Profesores();
 		tutorias = new Tutorias();
+		sesiones = new Sesiones();
 		citas = new Citas(CAPACIDAD);
-		sesiones = new Sesiones(CAPACIDAD);
 	}
 
 	public void insertar(Alumno alumno) throws OperationNotSupportedException {
@@ -133,12 +133,12 @@ public class Modelo {
 		return tutorias.get(profesor);
 	}
 
-	public Sesion[] getSesiones() {
+	public List<Sesion> getSesiones() {
 		return sesiones.get();
 	}
 
-	public Sesion[] getSesiones(Tutoria tutoria) {
-		return sesiones.get(tutoria);
+	public List<Sesion> getSesiones(Tutoria tutoria) {
+		return sesiones.get(tutoria); 
 	}
 
 	public Cita[] getCitas() {

@@ -221,8 +221,8 @@ public class Vista {
 
 	public void listarSesiones() {
 		Consola.mostrarCabecera("Listado de sesiones");
-		Sesion[] sesiones = controlador.getSesiones();
-		if (sesiones[0] != null) {
+		List<Sesion> sesiones = controlador.getSesiones();
+		if (!sesiones.isEmpty()) {
 			for (Sesion sesion : sesiones) {
 				if (sesion != null)
 					System.out.println(sesion);
@@ -234,8 +234,8 @@ public class Vista {
 
 	public void listarSesionesTutoria() {
 		Consola.mostrarCabecera("Listado de Sesiones por Tutoria");
-		Sesion[] sesiones = controlador.getSesiones(Consola.leerTutoria());
-		if (sesiones[0] != null) {
+		List <Sesion> sesiones = controlador.getSesiones(Consola.leerTutoria());
+		if (!sesiones.isEmpty()) {
 			for (Sesion sesion : sesiones) {
 				if (sesion != null)
 					System.out.println(sesion);

@@ -113,11 +113,11 @@ public class Controlador {
 		return modelo.getTutorias(profesor);
 	}
 
-	public Sesion[] getSesiones() {
+	public List<Sesion> getSesiones() {
 		return modelo.getSesiones();
 	}
 
-	public Sesion[] getSesiones(Tutoria tutoria) {
+	public List<Sesion> getSesiones(Tutoria tutoria) {
 		return modelo.getSesiones(tutoria);
 	}
 
