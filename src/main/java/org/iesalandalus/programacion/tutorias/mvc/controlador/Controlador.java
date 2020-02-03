@@ -121,15 +121,15 @@ public class Controlador {
 		return modelo.getSesiones(tutoria);
 	}
 
-	public Cita[] getCitas() {
+	public List<Cita> getCitas() {
 		return modelo.getCitas();
 	}
 
-	public Cita[] getCitas(Sesion sesion) {
+	public List<Cita> getCitas(Sesion sesion) {
 		return modelo.getCitas(sesion);
 	}
 
-	public Cita[] getCitas(Alumno alumno) {
+	public List<Cita> getCitas(Alumno alumno) {
 		return modelo.getCitas(alumno);
 	}
 

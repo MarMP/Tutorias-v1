@@ -17,7 +17,6 @@ import org.iesalandalus.programacion.tutorias.mvc.modelo.negocio.Tutorias;
 
 public class Modelo {
 
-	private static final int CAPACIDAD = 20;
 	private Alumnos alumnos;
 	private Citas citas;
 	private Profesores profesores;
@@ -29,7 +28,7 @@ public class Modelo {
 		profesores = new Profesores();
 		tutorias = new Tutorias();
 		sesiones = new Sesiones();
-		citas = new Citas(CAPACIDAD);
+		citas = new Citas();
 	}
 
 	public void insertar(Alumno alumno) throws OperationNotSupportedException {
@@ -141,15 +140,15 @@ public class Modelo {
 		return sesiones.get(tutoria); 
 	}
 
-	public Cita[] getCitas() {
+	public List <Cita> getCitas() {
 		return citas.get();
 	}
 
-	public Cita[] getCitas(Sesion sesion) {
+	public List<Cita> getCitas(Sesion sesion) {
 		return citas.get(sesion);
 	}
 
-	public Cita[] getCitas(Alumno alumno) {
+	public List<Cita> getCitas(Alumno alumno) {
 		return citas.get(alumno);
 	}
 

@@ -279,8 +279,8 @@ public class Vista {
 
 	public void listarCitas() {
 		Consola.mostrarCabecera("Listado de citas");
-		Cita[] citas = controlador.getCitas();
-		if (citas[0] != null) {
+		List<Cita> citas = controlador.getCitas();
+		if (!citas.isEmpty()) {
 			for (Cita cita : citas) {
 				if (cita != null)
 					System.out.println(cita);
@@ -292,8 +292,8 @@ public class Vista {
 
 	public void listarCitasSesion() {
 		Consola.mostrarCabecera("Listado de citas por sesión");
-		Cita[] citas = controlador.getCitas(Consola.leerSesionFicticia());
-		if (citas[0] != null) {
+		List <Cita> citas = controlador.getCitas(Consola.leerSesionFicticia());
+		if (!citas.isEmpty()) {
 			for (Cita cita : citas) {
 				if (cita != null)
 					System.out.println(cita);
@@ -305,8 +305,8 @@ public class Vista {
 
 	public void listarCitasAlumno() {
 		Consola.mostrarCabecera("Listado de citas por alumno");
-		Cita[] citas = controlador.getCitas(Consola.leerAlumnoFicticio());
-		if (citas[0] != null) {
+		List <Cita> citas = controlador.getCitas(Consola.leerAlumnoFicticio());
+		if (!citas.isEmpty()) {
 			for (Cita cita : citas) {
 				if (cita != null)
 					System.out.println(cita);
