@@ -1,9 +1,11 @@
 package org.iesalandalus.programacion.tutorias.mvc.modelo.negocio;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
+
 
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Tutoria;
@@ -17,7 +19,10 @@ public class Tutorias {
 	}
 
 	public List<Tutoria> get() {
-		return copiaProfundaTutorias();
+		List<Tutoria> tutoriasOrdenadas = copiaProfundaTutorias();
+		Comparator<Profesor> comparadorProfesor = Comparator.comparing(Profesor::getDni);
+		tutoriasOrdenadas.sort(Comparator.comparing(Tutoria::getProfesor, comparadorProfesor).thenComparing(Tutoria::getNombre));
+		return tutoriasOrdenadas;
 	}
 
 	private List<Tutoria> copiaProfundaTutorias() {
@@ -37,8 +42,9 @@ public class Tutorias {
 		for (Tutoria tutoria : coleccionTutorias) {
 			if (tutoria.getProfesor().equals(profesor)) {
 				tutoriasProfesor.add(new Tutoria(tutoria));
-			}
+			}		
 		}
+		tutoriasProfesor.sort(Comparator.comparing(Tutoria::getNombre));
 		return tutoriasProfesor;
 	}
 
