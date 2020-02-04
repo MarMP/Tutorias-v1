@@ -1,10 +1,12 @@
 package org.iesalandalus.programacion.tutorias.mvc.modelo.negocio;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
+import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Sesion;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Tutoria;
 
@@ -17,11 +19,15 @@ public class Sesiones {
 	}
 
 	public List<Sesion> get() {
-		return copiaProfundaSesiones();
+		List<Sesion> sesionesOrdenadas = copiaProfundaSesiones();
+		Comparator<Profesor> comparadorProfesor = Comparator.comparing(Profesor::getDni);
+		Comparator<Tutoria> comparadorTutoria = Comparator.comparing(Tutoria::getProfesor,comparadorProfesor).thenComparing(Tutoria::getNombre);
+		sesionesOrdenadas.sort(Comparator.comparing(Sesion::getTutoria,comparadorTutoria).thenComparing(Sesion::getFecha));
+		return sesionesOrdenadas;
 	}
 
 	private List<Sesion> copiaProfundaSesiones() {
-		List <Sesion> copiaSesion = new ArrayList<>();
+		List<Sesion> copiaSesion = new ArrayList<>();
 		for (Sesion sesion : coleccionSesiones) {
 			coleccionSesiones.add(new Sesion(sesion));
 		}
@@ -38,6 +44,7 @@ public class Sesiones {
 				sesionesTutoria.add(new Sesion(sesion));
 			}
 		}
+		sesionesTutoria.sort(Comparator.comparing(Sesion::getFecha));
 		return sesionesTutoria;
 	}
 
