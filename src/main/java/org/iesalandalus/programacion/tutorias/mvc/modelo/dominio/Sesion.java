@@ -121,7 +121,7 @@ public class Sesion {
 	}
 
 	public static Sesion getSesionFicticia(Tutoria tutoria, LocalDate fecha) {
-		return new Sesion(tutoria, fecha, LocalTime.of(16, 0), LocalTime.of(19, 0), 30);
+		return new Sesion(tutoria, fecha, HORA_COMIENZO_CLASES,HORA_FIN_CLASES, 1);
 	}
 
 	@Override

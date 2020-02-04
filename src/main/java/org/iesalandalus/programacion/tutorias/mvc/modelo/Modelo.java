@@ -45,7 +45,7 @@ public class Modelo {
 		}
 		Profesor profesor = profesores.buscar(tutoria.getProfesor());
 		if (profesor == null) {
-			throw new OperationNotSupportedException("ERROR: No existe ningún profesor con ese DNI.");
+			throw new OperationNotSupportedException("ERROR: No existe el profesor de esta tutoría.");
 		}
 		tutorias.insertar(new Tutoria (profesor, tutoria.getNombre())); 
 	}
@@ -56,7 +56,7 @@ public class Modelo {
 		}
 		Tutoria tutoria = tutorias.buscar(sesion.getTutoria());
 		if (tutoria == null) {
-			throw new OperationNotSupportedException("ERROR: No existe ninguna tutoria.");
+			throw new OperationNotSupportedException("ERROR: No existe la tutoría de esta sesión.");
 		}
 		sesiones.insertar(new Sesion (tutoria, sesion.getFecha(), sesion.getHoraInicio(),sesion.getHoraFin(),sesion.getMinutosDuracion()));
 	}
@@ -67,11 +67,11 @@ public class Modelo {
 		}
 		Alumno alumno = alumnos.buscar(cita.getAlumno());
 		if (alumno == null) {
-			throw new OperationNotSupportedException("ERROR: No existe ningún alumno con ese correo.");
+			throw new OperationNotSupportedException("ERROR: No existe el alumno de esta cita.");
 		} 
 		Sesion sesion = sesiones.buscar(cita.getSesion());
 		if (sesion == null) {
-			throw new OperationNotSupportedException("ERROR: No existe ninguna sesión con esa tutoria y fecha.");
+			throw new OperationNotSupportedException("ERROR: No existe la sesión de esta cita.");
 		} 
 		citas.insertar(new Cita(alumno, sesion, cita.getHora()));  
 	}
@@ -97,18 +97,34 @@ public class Modelo {
 	}
 
 	public void borrar(Alumno alumno) throws OperationNotSupportedException {
+		List<Cita>citasAlumno = citas.get(alumno);
+		for(Cita cita: citasAlumno) {
+			citas.borrar(cita);
+		}
 		alumnos.borrar(alumno);
 	}
 
 	public void borrar(Profesor profesor) throws OperationNotSupportedException {
+		List<Tutoria>tutoriaProfesor = tutorias.get(profesor);
+		for(Tutoria tutoria : tutoriaProfesor) {
+			borrar(tutoria);
+		}
 		profesores.borrar(profesor);
 	}
 
 	public void borrar(Tutoria tutoria) throws OperationNotSupportedException {
+		List<Sesion>sesionesTutoria = sesiones.get(tutoria);
+		for(Sesion sesion: sesionesTutoria) {
+			borrar(sesion);
+		}
 		tutorias.borrar(tutoria);
 	}
 
 	public void borrar(Sesion sesion) throws OperationNotSupportedException {
+		List<Cita>citaSesion= citas.get(sesion);
+		for (Cita cita : citaSesion) {
+			citas.borrar(cita);
+		}
 		sesiones.borrar(sesion);
 	}
 

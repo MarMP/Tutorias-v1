@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
+import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Cita;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Sesion;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Tutoria;
@@ -21,9 +22,9 @@ public class Sesiones {
 	public List<Sesion> get() {
 		List<Sesion> sesionesOrdenadas = copiaProfundaSesiones();
 		Comparator<Profesor> comparadorProfesor = Comparator.comparing(Profesor::getDni);
-		Comparator<Tutoria> comparadorTutoria = Comparator.comparing(Tutoria::getProfesor,comparadorProfesor).thenComparing(Tutoria::getNombre);
+		Comparator<Tutoria> comparadorTutoria = Comparator.comparing(Tutoria::getProfesor, comparadorProfesor).thenComparing(Tutoria::getNombre);
 		sesionesOrdenadas.sort(Comparator.comparing(Sesion::getTutoria,comparadorTutoria).thenComparing(Sesion::getFecha));
-		return sesionesOrdenadas;
+		return sesionesOrdenadas; 
 	}
 
 	private List<Sesion> copiaProfundaSesiones() {
