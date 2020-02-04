@@ -1,13 +1,16 @@
 package org.iesalandalus.programacion.tutorias.mvc.modelo.negocio;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Cita;
+import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Sesion;
+import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Tutoria;
 
 public class Citas {
 
@@ -18,7 +21,12 @@ public class Citas {
 	}
 
 	public List<Cita> get() {
-		return copiaProfundaCitas();
+		List<Cita>citasOrdenadas = copiaProfundaCitas();
+		Comparator<Profesor> comparadorProfesor = Comparator.comparing(Profesor::getDni);
+		Comparator<Tutoria> comparadorTutoria = Comparator.comparing(Tutoria::getProfesor, comparadorProfesor).thenComparing(Tutoria::getNombre);
+		Comparator<Sesion>comparadorSesion = Comparator.comparing(Sesion::getTutoria,comparadorTutoria).thenComparing(Sesion::getFecha);
+		citasOrdenadas.sort(Comparator.comparing(Cita::getSesion,comparadorSesion).thenComparing(Cita::getHora));
+		return citasOrdenadas;
 	}
 
 	private List<Cita> copiaProfundaCitas() {
@@ -39,6 +47,7 @@ public class Citas {
 				citasSesion.add(new Cita(cita));
 			}
 		}
+		citasSesion.sort(Comparator.comparing(Cita::getHora));
 		return citasSesion;
 	}
 
@@ -52,6 +61,10 @@ public class Citas {
 				citasAlumno.add(new Cita(cita));
 			}
 		}
+		Comparator<Profesor> comparadorProfesor = Comparator.comparing(Profesor::getDni);
+		Comparator<Tutoria> comparadorTutoria = Comparator.comparing(Tutoria::getProfesor, comparadorProfesor).thenComparing(Tutoria::getNombre);
+		Comparator<Sesion>comparadorSesion = Comparator.comparing(Sesion::getTutoria,comparadorTutoria).thenComparing(Sesion::getFecha);
+		citasAlumno.sort(Comparator.comparing(Cita::getSesion,comparadorSesion).thenComparing(Cita::getHora));
 		return citasAlumno;
 	}
 
