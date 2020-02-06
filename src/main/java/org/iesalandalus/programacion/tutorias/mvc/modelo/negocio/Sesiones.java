@@ -30,7 +30,7 @@ public class Sesiones {
 	private List<Sesion> copiaProfundaSesiones() {
 		List<Sesion> copiaSesion = new ArrayList<>();
 		for (Sesion sesion : coleccionSesiones) {
-			coleccionSesiones.add(new Sesion(sesion));
+			copiaSesion.add(new Sesion(sesion));
 		}
 		return copiaSesion;
 	}
